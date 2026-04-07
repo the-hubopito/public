@@ -1,57 +1,153 @@
 <!DOCTYPE html>
 <html>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 
-<!-- Mirrored from thehubopito.com/public/validate by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 04 Apr 2026 03:42:33 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head runat="server">
     <meta charset="UTF-8">
     <meta name="robots" content="noindex, nofollow">
-    <meta name="__RequestVerificationToken" content="4hDBEZyqGV6HjdGh8YGXGgEdf70raMdAOGG59LauNWQ2WGLrudcLyjxLfbRXDWW4sGQctCtLAWRqWLIu89W7RrrP-hZxan67bhoQwxaGCgk1:hZ88GZqic7GQM5_nZfVnOMMCJmTjIYRp8g46vIY942QEDjM_LxXNH7eu3SbZz8W8LiXmuMvrndSx5HUpibQlWJyd-T1zzBlKzqv7gTCG7ig1">
     <title>
-        
+        Certificate Validate
     </title>
-    <link rel="icon" href="https://thehubopito.com/Content/generic/images/favicon.ico" />
+    <link rel="icon" href="https://www.opito.com/resources/manifest/favicon.ico" />
     <meta http-equiv="CACHE-CONTROL" content="NO-CACHE" />
     <meta http-equiv="PRAGMA" content="NO-CACHE" />
-<link href="https://thehubopito.com/Content/public/css?v=7qgoEaxPMaESnc_2EcBE0RIjKbnHqM4Uxkxy745IBHw1" rel="stylesheet"/>
-<link href="https://thehubopito.com/Content/branded/OPITO/branding.css?1.37743.208.0" rel="stylesheet" type="text/css" />    
+    <link href="https://thehubopito.com/Content/public/css?v=7qgoEaxPMaESnc_2EcBE0RIjKbnHqM4Uxkxy745IBHw1"
+        rel="stylesheet" />
+    <link href="https://thehubopito.com/Content/branded/OPITO/branding.css?1.37743.208.0" rel="stylesheet"
+        type="text/css"
 </head>
-<body class="centre">
-    <div id="doc3" class="yui-t3">
-        <div class="wrapper">
-            <div id="hd">
 
-<div id="header">
-    
-    
-        
-        
-        
-        <div id="header-logo"></div>
-        <div id="header-top">
-            <ul class="header-links right">
-                
-                    <li class="last"><a href="https://thehubopito.com/">Log in</a></li>
-                
-            </ul>   
-        </div>
-        <div id="header-bottom">
-            
+<style>
+    .page-header { margin-bottom: 15px; }
+    .page-header h1 { margin: 0; padding: 0; }
 
-<script type="text/javascript">
+    /* Flash Message Styling */
+    .flash-message {
+        display: none;
+        position: relative;
+        width: auto;
+        margin: 0 0 15px 0;
+        padding: 12px 15px 12px 60px;
+        font-weight: normal;
+        border-radius: 4px;
+        font-size: 14px;
+        line-height: 1.4;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        clear: both;
+    }
 
-    document.addEventListener('DOMContentLoaded', function () {
-        var ulList = document.getElementsByClassName('secondary-nav');
+    .flash-error {
+        color: #fff;
+        background-color: #b81900;
+        background-image: url('https://www.thehubopito.com/Content/generic/images/icons/1321533297_error.png');
+        background-repeat: no-repeat;
+        background-position: 15px 13px;
+    }
 
-        for (var i = 0; i < ulList.length; i++) {
-            var newString = ulList[i].innerHTML.replace(/\|/, '');
-            ulList[i].innerHTML = newString;
-        }
-    });
-</script>
+    .flash-success {
+        color: #fff;
+        background-color: #2e7d32;
+        background-image: url('https://www.thehubopito.com/Content/generic/images/icons/1321532993_accept.png');
+        background-repeat: no-repeat;
+        background-position: 15px 13px;
+    }
 
-<style type="text/css">
-    .verticalBar { 
+    .close-btn {
+        position: absolute;
+        top: 8px;
+        right: 12px;
+        color: #fff;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        opacity: 0.7;
+        transition: opacity 0.2s;
+        line-height: 1;
+    }
+
+    .close-btn:hover { opacity: 1; }
+
+    #flashTitle { font-weight: bold; font-size: 15px; margin: 0 0 4px 0; }
+    .validation-summary-errors ul { margin: 0; padding-left: 0; list-style: none; }
+
+    /* Fake reCAPTCHA Styling */
+    .fake-recaptcha-container {
+        background: #f9f9f9;
+        border: 1px solid #d3d3d3;
+        border-radius: 3px;
+        width: 302px;
+        height: 76px;
+        display: flex;
+        align-items: center;
+        padding: 0 12px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        font-family: Roboto, helvetica, arial, sans-serif;
+        box-shadow: 0 0 4px 1px rgba(0,0,0,0.08);
+    }
+
+    .captcha-checkbox-area {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+        cursor: pointer;
+    }
+
+    .captcha-checkbox {
+        width: 24px;
+        height: 24px;
+        border: 2px solid #c1c1c1;
+        background: #fff;
+        border-radius: 2px;
+        margin-right: 15px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .captcha-checkbox.loading::after {
+        content: "";
+        width: 18px;
+        height: 18px;
+        border: 2px solid #4d90fe;
+        border-top-color: transparent;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .captcha-checkbox.checked::after {
+        content: "✔";
+        color: #00ad4e;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .captcha-text {
+        font-size: 14px;
+        color: #000;
+        user-select: none;
+    }
+
+    .captcha-logo-area {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 10px;
+        color: #555;
+    }
+
+    .captcha-logo-area img { width: 32px; margin-bottom: 2px; }
+
+    /* Button Tweak */
+    .btn-disabled { opacity: 0.6; cursor: not-allowed !important; }
+
+    .questions.narrow { padding-top: 0; margin-top: 0; }
+    .question:first-child { margin-top: 0; }
+
+    .verticalBar {
         display: inline;
         margin-right: 17px;
     }
@@ -66,84 +162,249 @@
     }
 </style>
 
-
-    
-    
-    
-    <div id="nav">
-        
-    </div>
-
-            <div style="clear:both;"></div>
-        </div>
-    
-    <div id="breadcrumbs"></div>
-</div>
+<body class="centre">
+    <div id="doc3" class="yui-t3">
+        <div class="wrapper">
+            <div id="hd">
+                <div id="header">
+                    <div id="header-logo"></div>
+                    <div id="header-top">
+                        <ul class="header-links right">
+                            <li class="last"><a href="#">Log in</a></li>
+                        </ul>
+                    </div>
+                    <div id="header-bottom">
+                        <div id="nav"></div>
+                        <div style="clear:both;"></div>
+                    </div>
+                </div>
             </div>
             <div id="bd">
+                <div class="page-header">
+                    <h1>Validate a certificate</h1>
+                </div>
                 
-<div class="page-header">
-    <h1>Validate a certificate</h1>
-</div>
-
-<div id="yui-main">
-    <div class="yui-b" style="margin-left:0;">
-        
-
-<form action="https://thehubopito.com/public/validate" method="post"><input name="__RequestVerificationToken" type="hidden" value="1kdbnOAe14gLe1xnjTCADW5o-YAzD8FlrKSWiZP0zJvbf8Xg38Yz1qpm4u2DG3buwpbLSBt7Sj2eDnfqr69x3PcBAMzupRAfZq_QIATdejo1" /><div class="ui-widget fancy-validation-summary flash-message ui-state-error ui-corner-all"><p>Sorry! There are a few problems with the selections you made below. Please try again.</p><div class="validation-summary-errors"><ul></ul></div></div><input id="IsPostback" name="IsPostback" type="hidden" value="True" />            <input type="hidden" name="FailedAttemptCount" value="0" />
-            <div class="questions narrow">
-
-                <div class="question">
-                    <label for="Surname">Learner's surname</label>
-                    <input id="Surname" name="Surname" type="text" value="" />
+                <div id="flashMessage" class="flash-message">
+                    <span class="close-btn" onclick="closeFlashMessage()" title="Tutup">&times;</span>
+                    <p id="flashTitle"></p>
+                    <div class="validation-summary-errors">
+                        <ul id="flashList"></ul>
+                    </div>
                 </div>
 
-                <div class="question">
-                    <label for="Ref">Certificate reference</label>
-                    <input id="Ref" name="Ref" type="text" value="" />
-                </div>
+                <div id="yui-main">
+                    <div class="yui-b" style="margin-left:0; margin-top:10px">
+                        <form onsubmit="validateData(event)">
+                            <div class="questions narrow">
+                                <div class="question">
+                                    <label for="Surname">Learner's surname</label>
+                                    <input id="Surname" name="Surname" type="text" value="" />
+                                </div>
+                                <div class="question">
+                                    <label for="Ref">Certificate reference</label>
+                                    <input id="Ref" name="Ref" type="text" value="" />
+                                </div>
+                                
+                                <!-- Fake reCAPTCHA UI -->
+                                <div class="fake-recaptcha-container">
+                                    <div class="captcha-checkbox-area" onclick="handleCaptcha()">
+                                        <div id="captchaBox" class="captcha-checkbox"></div>
+                                        <div class="captcha-text">I'm not a robot</div>
+                                    </div>
+                                    <div class="captcha-logo-area">
+                                        <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="reCAPTCHA">
+                                        <span>reCAPTCHA</span>
+                                        <div style="font-size: 8px;">Privacy - Terms</div>
+                                    </div>
+                                </div>
 
-                <div class="question">
-                    <div class='g-recaptcha' data-sitekey='6LerrwcTAAAAAHJvUArs1QCMdUpP2KBXMvL6F-cz' data-theme='light'></div><script src='https://www.google.com/recaptcha/api.js'></script>
+                                <div style="display:flex; justify-content:space-between; padding-top:10px" class="buttons">
+                                    <button id="submitBtn" class="btn btn-primary">Validate certificate</button>
+                                    <a class="btn btn-success" href="#">Click Here To Validate Multiple Certificates</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-
-                <div style="display:flex; justify-content:space-between; padding-top:10px" class="buttons">
-                    <button class="btn btn-primary">Validate certificate</button>
-                    <a class="btn btn-success" href="https://thehubopito.com/public/ValidateMultipleCertificates">Click Here To Validate Multiple Certificates</a>
-                </div>
-            </div>
-</form>    </div>
-</div>
-
             </div>
             <div class="push"></div>
         </div>
         <div id="ft">
             <div id="footer">
-                
-                    <ul class="footer-links left">
-                        <li><a href="https://thehubopito.com/Home/PrivacyAndSecurityStatement">Privacy and security</a></li>
-                        <li><a href="https://thehubopito.com/Home/TechnicalRequirements">Technical requirements and cookies</a></li>
-                        <li><a href="https://thehubopito.com/Home/Accessibility">Accessibility</a></li>
-                                            </ul>
-                    <ul class="footer-links right">
-                        <li><span>web2.creatiogreen.com  </span></li>
-                        <li><span>Build 1.37743.208.0</span></li>
-                        <li class="last"><span>&copy; Creatio 2026</span></li>
-                    </ul>
+                <ul class="footer-links left">
+                    <li><a href="https://thehubopito.com/Home/PrivacyAndSecurityStatement">Privacy and security</a></li>
+                    <li><a href="https://thehubopito.com/Home/TechnicalRequirements">Technical requirements and
+                            cookies</a></li>
+                    <li><a href="https://thehubopito.com/Home/Accessibility">Accessibility</a></li>
+                </ul>
+                <ul class="footer-links right">
+                    <li><span>web2.creatiogreen.com </span></li>
+                    <li><span>Build 1.37743.208.0</span></li>
+                    <li class="last"><span>&copy; Creatio 2026</span></li>
+                </ul>
             </div>
         </div>
         <div id="layoutApp"></div>
     </div>
     <script src="https://cdn.userway.org/widget.js" data-account="as671o1Yv5"></script>
     <div id="layoutApp"></div>
-    
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.min.js" integrity="sha256-AlTido85uXPlSyyaZNsjJXeCs07eSv3r43kyCVc8ChI=" crossorigin="anonymous"></script>
 
-<script src="https://thehubopito.com/Scripts/public?v=szdMChrMe1hQlE00EqqH1S2R4CnXGZjqTow4nEKqf-M1"></script>
-    
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.min.js"
+        integrity="sha256-AlTido85uXPlSyyaZNsjJXeCs07eSv3r43kyCVc8ChI=" crossorigin="anonymous"></script>
+
+    <script>
+        const certificateDatabase = [
+            {
+                surname: "Zaeni",
+                firstName: "Muhammad",
+                ref: "OPITOG2FOUGTR45",
+                training: "RIGGER INITIAL TRAINING (PREVIUOSLY STAGE 1)",
+                receivedDate: "14-01-2026",
+                expiryDate: "13-09-2028"
+            },
+            {
+                surname: "Rahman",
+                firstName: "Ahmad",
+                ref: "CERT002",
+                training: "Offshore Lifeboat Emergency Training",
+                receivedDate: "12/01/2024",
+                expiryDate: "11/01/2027"
+            }
+        ];
+
+        let isCaptchaVerified = false;
+        let flashTimeout;
+
+        function handleCaptcha() {
+            if (isCaptchaVerified) return;
+
+            const box = document.getElementById("captchaBox");
+            box.classList.add("loading");
+
+            // Simulasi loading selama 1.2 detik agar terlihat asli
+            setTimeout(() => {
+                box.classList.remove("loading");
+                box.classList.add("checked");
+                isCaptchaVerified = true;
+            }, 1200);
+        }
+
+        // Fungsi untuk mereset tampilan captcha
+        function resetCaptcha() {
+            const box = document.getElementById("captchaBox");
+            box.classList.remove("loading", "checked");
+            isCaptchaVerified = false;
+        }
+
+        function validateData(e) {
+            e.preventDefault();
+
+            if (!isCaptchaVerified) {
+                showFlashMessage("error", ["Please verify that you are not a robot."]);
+                return;
+            }
+
+            const surnameInput = document.getElementById("Surname").value.trim();
+            const refInput = document.getElementById("Ref").value.trim();
+
+            if (!surnameInput || !refInput) {
+                showFlashMessage("error", "Harap isi semua kolom yang diperlukan.");
+                return;
+            }
+
+            const certFound = certificateDatabase.find(item =>
+                item.surname.toLowerCase() === surnameInput.toLowerCase() &&
+                item.ref.toUpperCase() === refInput.toUpperCase()
+            );
+
+            if (certFound) {
+                showFlashMessage("success", certFound);
+            } else {
+                showFlashMessage("not", "");
+            }
+
+            // Selalu reset captcha setelah tombol diklik (seperti perilaku asli Google reCAPTCHA di banyak form)
+            resetCaptcha();
+        }
+
+        function showFlashMessage(type, payload) {
+            const box = document.getElementById("flashMessage");
+            const title = document.getElementById("flashTitle");
+            const list = document.getElementById("flashList");
+
+            if (flashTimeout) clearTimeout(flashTimeout);
+
+            if (!box || !title || !list) return;
+
+            list.innerHTML = "";
+            box.classList.remove("flash-error", "flash-success");
+
+            if (type === "error") {
+                box.classList.add("flash-error");
+                box.style.backgroundColor = "#b81900";
+                title.innerText = "Error!";
+                
+                const li = document.createElement("li");
+                li.textContent = payload;
+                list.appendChild(li);
+            } else if (type === "not") {
+                box.classList.add("flash-error");
+                box.style.backgroundColor = "#b81900";
+                title.innerText = "Sorry! There are a few problems with the selections you made below. Please try again.";
+                
+                const li = document.createElement("li");
+                li.className = "cert-detail";
+                li.innerHTML = `
+                    • We couldn’t find a certificate that matches the details you entered.`;
+                list.appendChild(li);
+            } else {
+                box.classList.add("flash-success");
+                box.style.backgroundColor = "#2e7d32";
+                title.innerText = "Certificate is valid!";
+                
+                const li = document.createElement("li");
+                li.className = "cert-detail";
+                li.innerHTML = `
+                    We can confirm that <b>${payload.firstName} ${payload.surname}</b> received a certificate for 
+                    <i>${payload.training}</i> on <b>${payload.receivedDate}</b>. The certificate expires on <b>${payload.expiryDate}</b>.
+                `;
+                list.appendChild(li);
+            }
+
+            box.style.display = "block";
+            // Scroll ke pesan agar terlihat oleh pengguna
+            box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            flashTimeout = setTimeout(() => closeFlashMessage(), 30000);
+        }
+        function closeFlashMessage() {
+            const box = document.getElementById("flashMessage");
+            if (box) box.style.display = "none";
+            if (flashTimeout) clearTimeout(flashTimeout);
+        }
+
+        /**
+         * Cek parameter URL saat halaman dimuat
+         * Format: ?u=Surname&r=Ref
+         */
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const userSurname = urlParams.get('u');
+            const certRef = urlParams.get('r');
+
+            if (userSurname || certRef) {
+                if (userSurname) document.getElementById("Surname").value = userSurname;
+                if (certRef) document.getElementById("Ref").value = certRef;
+                
+                // Jika kedua parameter ada, langsung jalankan validasi
+                if (userSurname && certRef) {
+                    validateData();
+                }
+            }
+        };
+    </script>
+
 </body>
 
-<!-- Mirrored from thehubopito.com/public/validate by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 04 Apr 2026 03:42:33 GMT -->
 </html>
